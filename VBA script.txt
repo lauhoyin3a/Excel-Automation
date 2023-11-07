@@ -1,0 +1,47 @@
+Sub FindRecord()
+    Dim searchValue As String
+    Dim lastRow As Long
+    Dim i As Long
+    Dim foundRow As Long
+    
+    
+    searchValue = InputBox("Search Row")
+    
+
+    lastRow = Cells(Rows.Count, 2).End(xlUp).Row
+   
+    For i = 1 To lastRow
+       
+        If Cells(i, 2).Value = searchValue Then
+            ' Output the row number if a match is found
+            
+            foundRow = i
+            recordFound = True
+            ' Exit the loop after finding the first match
+            Exit For
+        End If
+    Next i
+    
+    Dim searchColValue As String
+    Dim foundColumn As Long
+    
+    ' Prompt the user for the search value
+    searchColValue = InputBox("Search Col:")
+    
+    ' Search for the value in the first row
+    foundColumn = Application.Match(searchColValue, Rows(1), 0)
+    
+    
+   
+    
+
+    Dim userInputValue As String
+    
+   
+
+    userInputValue = InputBox("Enter the new value:")
+    
+    MsgBox "Match found in Row: " & foundRow
+    MsgBox "Match found in Col: " & foundColumn
+    Cells(foundRow, foundColumn).Value = userInputValue
+
