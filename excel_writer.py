@@ -7,7 +7,10 @@ import pyperclip
 vba_file_path=r'C:\Users\Tom\Downloads\VBA script.txt'
 with open(vba_file_path,'r') as file:
     vba_script=file.read()
-print(vba_script)
+checking_path=r"C:\Users\Tom\Downloads\checking.txt"
+
+with open(checking_path,'r') as file:
+    checking_text=file.read()
 
 def pd_checking(excel_file_path,field_name, field_type):
     df=pd.read_excel(excel_file_path)
@@ -38,9 +41,17 @@ def paste_vba_script(vba_script,excel_file_path):
     pyautogui.click()
     print(vba_script)
     pyautogui.typewrite(vba_script,interval=0.0007)
-    time.sleep(3)
+    time.sleep(2)
+    # pyautogui.hotkey('ctrl','a')
+    # time.sleep(1)
+    # pyautogui.hotkey('ctrl','c')
+    # time.sleep(1)
+    # print(pyperclip.paste())
+    # if pyperclip.paste()==pyperclip.copy(checking_path):
+    #     print("same")
+    #time.sleep(10)
 def run_vba_script(field_name,column_name,value):
-    time.sleep(3)
+    time.sleep(1)
     pyautogui.hotkey('f5')
     time.sleep(2)
     pyautogui.typewrite(field_name)
@@ -51,7 +62,7 @@ def run_vba_script(field_name,column_name,value):
     time.sleep(1)
     pyautogui.typewrite(value)
     pyautogui.press('enter')
-    time.sleep(3)
+    time.sleep(2)
     pyautogui.press('enter')
     time.sleep(1)
     pyautogui.press('enter')
@@ -71,16 +82,26 @@ def run_vba_script(field_name,column_name,value):
 field_name=input('target field name to be modify: ')
 column_name=input('target column name to be modify: ')
 value=input('input value:')
-
+print('Please set keyboard input layout as US')
 process=input(f'Ready to modify {column_name} field from {field_name} in excels, enter [y/n]: ')
 if process == 'n':
     raise SystemExit
 
 
 excel_file_path_list=[]
-excel_file_path_list.append(r'C:\Users\Tom\abc.xlsx')
+#excel_file_path_list.append(r'C:\Users\Tom\ArcGIS\My Survey Designs\GOMPS_Event_Misc 122\GOMPS_Event_Misc 122.xlsx')
+#excel_file_path_list.append(r'C:\Users\Tom\ArcGIS\My Survey Designs\GOMPS_Typhoon_Shelter 3\GOMPS_Typhoon_Shelter 3.xlsx')
 
-
+excel_file_path_list.append(r"C:\Users\Tom\ArcGIS\My Survey Designs\1f898ea71b894bedb43b3face5b23faa\GOMPS_Event_Misc.xlsx")
+excel_file_path_list.append(r"C:\Users\Tom\ArcGIS\My Survey Designs\f646d8b9480549638137236afc417364\GOMPS_Typhoon_Shelter.xlsx")
+excel_file_path_list.append(r"C:\Users\Tom\ArcGIS\My Survey Designs\f11f024cf8e8410bb1e0934ecc57e39c\GOPMS_Hopsital.xlsx")
+excel_file_path_list.append(r"C:\Users\Tom\ArcGIS\My Survey Designs\d15fdf8320ae46c4bd286dcd2d988571\GOMPS_Restricted_Access.xlsx")
+excel_file_path_list.append(r"C:\Users\Tom\ArcGIS\My Survey Designs\994e964647f14fa297eeb30e80f922a8\GOMPS_Railway_Development.xlsx")
+excel_file_path_list.append(r"C:\Users\Tom\ArcGIS\My Survey Designs\71ec010703a14a8d855dda625f3ddc10\GOMPS_Dangerous_Goods.xlsx")
+excel_file_path_list.append(r"C:\Users\Tom\ArcGIS\My Survey Designs\d7655e7434aa4f1ca9459828b1a2d041\GOPMS_Ambulance.xlsx")
+excel_file_path_list.append(r"C:\Users\Tom\ArcGIS\My Survey Designs\d6de5b3acd7642668aa3e52307fbfe5a\GOMPS_Hotel.xlsx")
+excel_file_path_list.append(r"C:\Users\Tom\ArcGIS\My Survey Designs\7ae799842cdb478da58f67ac43683c76\GOMPS_Tunnel.xlsx")
+excel_file_path_list.append(r"C:\Users\Tom\ArcGIS\My Survey Designs\815511cb28dd480a99ca418c6a02149b\GOMPS_view_edit.xlsx")
 for excel_file_path in excel_file_path_list:
     data_exist = pd_checking(excel_file_path, field_name, column_name)
     if not data_exist:
